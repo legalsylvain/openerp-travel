@@ -3,7 +3,6 @@
 [report]
 omit =
     /usr/*
-    /tmp/*
     */bin/*
     */lib/*
     */odoo/*
