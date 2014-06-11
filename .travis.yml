@@ -3,16 +3,16 @@
 language: python
 
 python:
-#  - "pypy" # not supported by odoo 8
-#  - "3.4"  # not supported by odoo 8
-#  - "3.3"  # not supported by odoo 8
-  - "2.7"
-#  - "2.6"  # not supported by odoo 8
+#    - "pypy" # not supported by odoo 8
+#    - "3.4"  # not supported by odoo 8
+#    - "3.3"  # not supported by odoo 8
+    - "2.7"
+#    - "2.6"  # not supported by odoo 8
 
 env:
-   - ODOO="https://github.com/Bubbles-IT/odoo/archive/master.tar.gz"  # Temp until https://github.com/odoo/odoo/pull/81 is solved
-#  - ODOO="https://github.com/odoo/odoo/archive/master.zip"
-#  - ODOO="ocb"
+    - ODOO="https://github.com/savoirfairelinux/odoo/archive/setuptools-addons.tar.gz"  # Temp until https://github.com/odoo/odoo/issues/185 or https://github.com/odoo/odoo/issues/441 is fixed
+#    - ODOO="https://github.com/odoo/odoo/archive/master.tar.gz"
+#    - ODOO="https://github.com/OCA/OCB/archive/master.zip"
 
 # Need coveralls for coverage reports
 # Need flake8 for pep8 testing
@@ -23,8 +23,8 @@ install:
     - pip install coveralls flake8
     - pip install http://download.gna.org/pychart/PyChart-1.39.tar.gz
     - pip install ${ODOO}
-    - bzr branch --stacked lp:partner-contact-management /tmp/partner-contact-management
-    - bzr branch --stacked lp:openerp-hr /tmp/openerp-hr
+    - bzr branch --stacked lp:partner-contact-management ~/partner-contact-management
+    - bzr branch --stacked lp:openerp-hr ~/openerp-hr
 
 # Create databae
 # Pre-install modules and dependencies
@@ -42,8 +42,8 @@ script:
     - flake8 . --max-line-length=120 --exclude=__init__.py
 #    - git diff $TRAVIS_BRANCH | flake8 . --diff --max-line-length=120 --filename=__init__.py --ignore=F401
 #    - git diff $TRAVIS_BRANCH | flake8 . --diff --max-line-length=120 --exclude=__init__.py
-    - PYTHONPATH=$(dirname $(which openerp-server))/.. openerp-server -d test --stop-after-init --init=$(python -c 'import os; print(",".join(x for x in os.listdir(".") if os.path.isdir(x) and not x.startswith(".")))') --addons-path=$(pwd),/tmp/partner-contact-management,/tmp/openerp-hr
-    - PYTHONPATH=$(dirname $(which openerp-server))/.. coverage run $(which openerp-server) -d test --test-enable --log-level=test --stop-after-init --init=$(python -c 'import os; print(",".join(x for x in os.listdir(".") if os.path.isdir(x) and not x.startswith(".")))') --addons-path=$(pwd),/tmp/partner-contact-management,/tmp/openerp-hr
+    - odoo.py --stop-after-init --init=$(python -c 'import os; print(",".join(x for x in os.listdir(".") if os.path.isdir(x) and not x.startswith(".")))') --addons-path=$(pwd),$VIRTUAL_ENV/addons,~/partner-contact-management,~/openerp-hr
+    - coverage run $(which odoo.py) --test-enable --log-level=test --stop-after-init --init=$(python -c 'import os; print(",".join(x for x in os.listdir(".") if os.path.isdir(x) and not x.startswith(".")))') --addons-path=$(pwd),$VIRTUAL_ENV/addons,~/partner-contact-management,~/openerp-hr
 
 after_success:
   coveralls
