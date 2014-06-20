@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/bwrsandman/openerp-travel.png?branch=master)](https://travis-ci.org/bwrsandman/openerp-travel)
-[![Coverage Status](https://coveralls.io/repos/bwrsandman/openerp-travel/badge.png)](https://coveralls.io/r/bwrsandman/openerp-travel)
+[![Build Status](https://travis-ci.org/legalsylvain/openerp-travel.png?branch=master)](https://travis-ci.org/legalsylvain/openerp-travel)
+[![Coverage Status](https://coveralls.io/repos/legalsylvain/openerp-travel/badge.png)](https://coveralls.io/r/legalsylvain/openerp-travel)
 
 openerp-travel
 ==============
