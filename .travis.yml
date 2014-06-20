@@ -3,11 +3,7 @@
 language: python
 
 python:
-#    - "pypy" # not supported by odoo 8
-#    - "3.4"  # not supported by odoo 8
-#    - "3.3"  # not supported by odoo 8
     - "2.7"
-#    - "2.6"  # not supported by odoo 8
 
 env:
     - ODOO="https://github.com/savoirfairelinux/odoo/archive/setuptools-addons.tar.gz"  # Temp until https://github.com/odoo/odoo/issues/185 or https://github.com/odoo/odoo/issues/441 is fixed
